@@ -189,19 +189,35 @@ function rotateBottom() {
     requestRender();
 }
 
-// Recentre the camera on a given lat/lon
+// Recentre on a given lat/lon by ROTATING THE GLOBE (the camera stays fixed at
+// 0,0,7). The old version orbited the camera instead, which left drag/arrow
+// rotation misaligned with the screen afterwards — that was the "out of whack"
+// bug the Reset button was working around.
 function centerGlobe(lat, lon) {
-    globe.rotation.set(0, 0, 0);
-
+    // Local position of the target on the unit sphere — same convention as the
+    // pins, so a centred point lines up with its pin.
     const phi = (90 - lat) * (Math.PI / 180);
     const theta = -(lon * (Math.PI / 180));
+    const v = new THREE.Vector3(
+        Math.sin(phi) * Math.cos(theta),
+        Math.cos(phi),
+        Math.sin(phi) * Math.sin(theta)
+    );
 
-    camera.position.x = 7 * Math.sin(phi) * Math.cos(theta);
-    camera.position.y = 7 * Math.cos(phi);
-    camera.position.z = 7 * Math.sin(phi) * Math.sin(theta);
+    // Rotate the globe so that point faces the camera (+Z), north staying up:
+    // yaw about Y to swing the longitude to front, then pitch about X to lift
+    // the latitude to centre.
+    const r = Math.hypot(v.x, v.z);
+    const yaw = Math.atan2(-v.x, v.z);
+    const pitch = Math.atan2(v.y, r);
 
-    camera.lookAt(0, 0, 0);
-    globe.rotation.set(0, 0, 0);
+    const qy = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
+    const qx = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), pitch);
+
+    // qx * qy applies the yaw first, then the pitch. Assigning to .quaternion
+    // keeps globe.rotation in sync, so subsequent drag/arrow input continues
+    // smoothly from here.
+    globe.quaternion.copy(qx.multiply(qy));
     requestRender();
 }
 
