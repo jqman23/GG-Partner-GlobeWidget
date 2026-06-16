@@ -211,13 +211,14 @@ function centerGlobe(lat, lon) {
     const yaw = Math.atan2(-v.x, v.z);
     const pitch = Math.atan2(v.y, r);
 
-    const qy = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), yaw);
-    const qx = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), pitch);
-
-    // qx * qy applies the yaw first, then the pitch. Assigning to .quaternion
-    // keeps globe.rotation in sync, so subsequent drag/arrow input continues
-    // smoothly from here.
-    globe.quaternion.copy(qx.multiply(qy));
+    // Set the Euler angles DIRECTLY (order XYZ) rather than building a
+    // quaternion and assigning it. Three's "XYZ" Euler with z=0 is exactly
+    // Rx(pitch)*Ry(yaw) — the orientation we want — but storing the angles
+    // literally keeps roll (z) at 0. Assigning a quaternion instead would force
+    // a decomposition that, for |yaw| > 90° (Australia, New Zealand), flips into
+    // a branch with z = ±180°. Drag/arrows never touch z, so that baked-in roll
+    // made those two regions feel inverted afterwards.
+    globe.rotation.set(pitch, yaw, 0);
     requestRender();
 }
 
