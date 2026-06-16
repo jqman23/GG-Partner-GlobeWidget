@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GG Partner Globe</title>
+
+    <!-- Preconnect to the asset/font hosts so they start resolving early -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://custom.cvent.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Montserrat -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Three.js (r128). defer keeps script order while not blocking parse. -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script defer src="js/partners.js"></script>
+    <script defer src="js/globe.js"></script>
+</head>
+<body>
+    <div id="globeContainer"></div>
+    <div id="infoBox" class="info-box"></div>
+
+    <!-- Buttons for different locations -->
+    <div id="buttonContainer">
+        <button class="centerButton" id="australiaButton">Australia</button>
+        <button class="centerButton" id="newZealandButton">New Zealand</button>
+        <button class="centerButton" id="northamerica">North America</button>
+        <button class="centerButton" id="ukButton">United Kingdom</button>
+        <button class="resetButton" id="reset">Reset</button>
+    </div>
+
+    <!-- Simple arrows for rotating the globe -->
+    <div class="arrow arrow-left" onclick="rotateLeft()">&#8592;</div>
+    <div class="arrow arrow-right" onclick="rotateRight()">&#8594;</div>
+    <div class="arrow arrow-top" onclick="rotateTop()">&#8593;</div>
+    <div class="arrow arrow-bottom" onclick="rotateBottom()">&#8595;</div>
+</body>
+</html>

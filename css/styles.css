@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: "Montserrat", sans-serif;
+}
+
+#centerButton {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #162A53;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#resetButton {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #f58c35;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#centerButton:hover {
+    background-color: #1f3a76;
+}
+
+#resetButton:hover {
+    background-color: #f5ae35;
+}
+
+#buttonContainer {
+    position: fixed;
+    top: 50%;
+    left: 20px; /* Distance from the left side of the screen */
+    transform: translateY(-50%); /* Vertically center the buttons */
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 15px; /* Add space between buttons */
+}
+
+.centerButton {
+    padding: 10px 20px;
+    background-color: #162A53;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.centerButton:hover {
+    background-color: #1f3a76;
+}
+
+.resetButton {
+    padding: 10px 20px;
+    background-color: #f58c35;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.resetButton:hover {
+    background-color: #f5ae35;
+}
+
+#globeContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    min-height: 425px; /* Ensures enough space in Cvent */
+    max-height: 425px; /* Set your desired max height */
+}
+
+.info-box {
+    position: fixed; /* Ensures it appears on top */
+    z-index: 9999;
+    background: #162A53; /* Cvent-friendly background */
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    padding: 12px;
+    border-radius: 8px;
+    display: none;
+    max-width: 300px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+}
+
+.info-box img {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+/* Hide the globe and all related elements entirely under 1000px width */
+@media (max-width: 1000px) {
+    #globeContainer,
+    #buttonContainer,
+    .arrow,
+    .info-box {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+        position: absolute !important;
+    }
+    body {
+        overflow: auto !important; /* allow scrolling if needed */
+    }
+}
+
+.arrow {
+    position: absolute;
+    font-size: 20px;
+    color: #162A53;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+.arrow-left {
+    top: 50%;
+    left: 200px;
+    transform: translateY(-50%);
+}
+
+.arrow-right {
+    top: 50%;
+    right: 200px;
+    transform: translateY(-50%);
+}
+
+.arrow-top {
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.arrow-bottom {
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
