@@ -93,3 +93,5 @@ If you don't want auto-height, drop the `<script>` and the `id` — the fixed
 Cvent's custom-code blocks expect a single HTML payload. For that use case,
 inline the contents of `css/styles.css`, `js/partners.js` and `js/globe.js` back
 into `index.html`, or host these files and reference them by URL.
+
+Deployment test: 2026-06-15.
