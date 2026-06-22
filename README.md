@@ -11,7 +11,7 @@ Originally a single Cvent-embedded HTML file, now split into maintainable files.
 ```
 index.html        # Markup, font/asset preconnects, script includes
 css/styles.css    # All styling (Montserrat applied throughout)
-js/partners.js    # Partner pin data (lat/lon + info)
+js/partners.js    # Partner pin data (enabled toggle + lat/lon + info)
 js/globe.js       # Three.js scene, pins, interaction, controls
 js/tracker.js     # Once-per-session interaction tracking + iframe height
 ```
@@ -32,8 +32,10 @@ Then open http://localhost:8000.
 
 ## Adding / editing partners
 
-Edit `js/partners.js` — add an object with `lat`, `lon`, `name`, `description`,
-`website`, and `logo`. No other file needs to change.
+Edit `js/partners.js` — add an object with `enabled`, `lat`, `lon`, `name`,
+`description`, `website`, and `logo`. Set `enabled: true` to show a partner on
+the globe, or `enabled: false` to keep the partner hidden until confirmed. No
+other file needs to change.
 
 ## Notes on performance
 

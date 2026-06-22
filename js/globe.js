@@ -73,8 +73,10 @@ function init() {
         pins.push(pin);
     }
 
-    // Build pins from the partner data (js/partners.js)
-    (window.PARTNERS || []).forEach((p) => createPin(p.lat, p.lon, p));
+    // Build pins from enabled partner data (js/partners.js)
+    (window.PARTNERS || [])
+        .filter((p) => p.enabled)
+        .forEach((p) => createPin(p.lat, p.lon, p));
 
     // Hover effect for the pins
     document.addEventListener("mousemove", (event) => {
